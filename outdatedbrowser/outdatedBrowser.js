@@ -9,6 +9,8 @@ var outdatedBrowser = function(options) {
 
     //Variable definition
     var outdated = document.getElementById("outdated");
+    var outdated_title = document.getElementById("outdated-title");
+    var outdated_subtext = document.getElementById("outdated-subtext");
     var btnClose = document.getElementById("btnCloseUpdateBrowser");
     var btnUpdate = document.getElementById("btnUpdateBrowser");
 
@@ -16,12 +18,16 @@ var outdatedBrowser = function(options) {
     this.defaultOpts = {
         bgColor: '#F25648',
         color: '#ffffff',
-        lowerThan: 'transform'
+        lowerThan: 'transform',
+        direction: 'ltr',
+        language: 'en'
     }
 
     if (options) {
         this.defaultOpts.bgColor = options.bgColor,
         this.defaultOpts.color = options.color;
+        this.defaultOpts.direction = options.direction;
+        this.defaultOpts.language = options.language;
 
         //assign css3 property to IE browser version
         if(options.lowerThan == 'IE8' || options.lowerThan == 'borderSpacing') {
@@ -39,10 +45,14 @@ var outdatedBrowser = function(options) {
         bkgColor = this.defaultOpts.bgColor;
         txtColor = this.defaultOpts.color;
         cssProp = this.defaultOpts.lowerThan;
+        direction = this.defaultOpts.direction;
+        language = this.defaultOpts.language;
     } else {
         bkgColor = this.defaultOpts.bgColor;
         txtColor = this.defaultOpts.color;
         cssProp = this.defaultOpts.lowerThan;
+        direction = this.defaultOpts.direction;
+        language = this.defaultOpts.language;
     }
 
     //Define opacity and fadeIn/fadeOut functions
@@ -76,6 +86,28 @@ var outdatedBrowser = function(options) {
         return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
     }
 
+    //Translations
+    var translations =
+    {
+        'en': 'YOUR BROWSER IS OUT-OF-DATE! | UPDATE YOUR BROWSER TO VIEW THIS WEBSITE CORRECTLY. | UPDATE MY BROWSER NOW',
+        'he': 'הדפדפן שלך לא מעודכן! | עדכן את הדפדפן שלך עכשיו כדי להנות מחווית הגלישה. | עדכן את הדפדפן עכשיו'
+    }
+
+    //Check if RTL is configured and add rtl-direction class if true
+    function is_rtl() {
+        if (direction == 'rtl') {
+            outdated.className += " rtl-direction";
+        }
+    }
+
+    //Translate messages
+    function translate() {
+        var str = translations[ language ].split('|');
+        outdated_title.innerHTML = "\n" + str[0];
+        outdated_subtext.innerHTML = "\n" + str[1];
+        btnUpdate.innerHTML = "\n" + str[2];
+    }
+
     var supports = (function() {
        var div = document.createElement('div'),
           vendors = 'Khtml Ms O Moz Webkit'.split(' '),
@@ -97,8 +129,11 @@ var outdatedBrowser = function(options) {
        };
     })();
 
+    is_rtl();
+    translate();
     //check for css3 property support (transform=default)
     if ( !supports(''+ cssProp +'') ) {
+
         if (done && outdated.style.opacity !== '1') {
             done = false;
             for (var i = 1; i <= 100; i++) {
