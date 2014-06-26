@@ -5,7 +5,7 @@
     <title>Outdated Browser</title>
     <meta name="description" content="A time saving tool for developers. It detects outdated browsers and advises users to upgrade to a new version.">
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="../outdatedbrowser/outdatedBrowser.min.css">
+    <link rel="stylesheet" type="text/css" href="../outdatedbrowser/outdatedBrowser.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <style type="text/css">
         body {
@@ -37,13 +37,13 @@
 
     <!-- ============= Outdated Browser ============= -->
     <div id="outdated">
-         <h6>Your browser is out-of-date!</h6>
-         <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+         <h6 id="outdated-title">Your browser is out-of-date!</h6>
+         <p><span id="outdated-subtext">Update your browser to view this website correctly.</span> <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
          <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
      </div>
 
     <!-- javascript includes -->
-    <script src="../outdatedbrowser/outdatedBrowser.min.js"></script>
+    <script src="../outdatedbrowser/outdatedBrowser.js"></script>
 
     <!-- plugin call -->
     <script>
@@ -64,7 +64,9 @@
             outdatedBrowser({
                 bgColor: '#f25648',
                 color: '#ffffff',
-                lowerThan: 'transform'
+                lowerThan: 'transform',
+                direction: 'rtl',
+                language: 'he'
             })
         );
 
