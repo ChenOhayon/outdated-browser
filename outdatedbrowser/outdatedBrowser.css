@@ -10,6 +10,7 @@ website:    http://www.burocratik.com
     text-align: center; text-transform: uppercase; z-index:1500;
     background-color: #f25648; color: #ffffff;
 }
+#outdated.rtl-direction { direction: rtl; }
 * html #outdated{position: absolute;}
 #outdated h6{font-size: 25px; line-height: 25px; margin: 30px 0 10px;}
 #outdated p{font-size: 12px; line-height: 12px;}
