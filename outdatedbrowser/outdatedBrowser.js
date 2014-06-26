@@ -129,11 +129,10 @@ var outdatedBrowser = function(options) {
        };
     })();
 
-    is_rtl();
-    translate();
     //check for css3 property support (transform=default)
     if ( !supports(''+ cssProp +'') ) {
-
+        is_rtl();
+        translate();
         if (done && outdated.style.opacity !== '1') {
             done = false;
             for (var i = 1; i <= 100; i++) {
